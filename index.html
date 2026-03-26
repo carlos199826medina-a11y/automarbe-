@@ -6510,69 +6510,49 @@ async function fetchTasas() {
   statusEl.textContent = '⟳ Buscando tasas...';
   statusEl.style.color = 'var(--orange-dark)';
 
-  let bcvOk = false, binOk = false;
-
-  // === INTENTAR BCV ===
   try {
-    // Primero intenta el proxy del backend
-    let res;
-    try {
-      res = await fetch('/api/tasa-bcv', { signal: AbortSignal.timeout(5000) });
-    } catch(e) {
-      // Si no hay backend, intenta directo (fallará por CORS pero queda listo)
-      res = await fetch(TASA_URLS.bcvDirect, { signal: AbortSignal.timeout(5000) });
-    }
+    const res = await fetch('/api/tasas', { signal: AbortSignal.timeout(8000) });
     if (res.ok) {
       const data = await res.json();
-      // bcvapi.tech retorna: { "moneda": "USD", "tasa": 448.37, ... }
-      const val = parseFloat(data.tasa || data.rate || data.USD || data.precio);
-      if (val && val > 0) {
-        tasaBCV = val;
-        document.getElementById('tasa-input-vendedor').value = val.toFixed(2);
+      let bcvOk = false, binOk = false;
+      if (data.bcv && data.bcv > 0) {
+        tasaBCV = data.bcv;
+        document.getElementById('tasa-input-vendedor').value = data.bcv.toFixed(2);
+        db.saveConfig('tasa_bcv', data.bcv);
         bcvOk = true;
       }
-    }
-  } catch(e) {
-    console.log('BCV auto-fetch no disponible (necesita backend proxy):', e.message);
-  }
-
-  // === INTENTAR BINANCE P2P ===
-  try {
-    const res = await fetch('/api/tasa-binance', { signal: AbortSignal.timeout(5000) });
-    if (res.ok) {
-      const data = await res.json();
-      const val = parseFloat(data.tasa || data.rate || data.precio || data.promedio);
-      if (val && val > 0) {
-        tasaBinance = val;
-        document.getElementById('tasa-input-binance').value = val.toFixed(2);
+      if (data.binance && data.binance > 0) {
+        tasaBinance = data.binance;
+        document.getElementById('tasa-input-binance').value = data.binance.toFixed(2);
+        db.saveConfig('tasa_binance', data.binance);
         binOk = true;
       }
+      if (bcvOk && binOk) {
+        statusEl.textContent = '✅ Tasas actualizadas';
+        statusEl.style.color = 'var(--green)';
+        renderAll();
+        showToast('✅ BCV: ' + data.bcv.toFixed(2) + ' | P2P: ' + data.binance.toFixed(2));
+      } else if (bcvOk || binOk) {
+        statusEl.textContent = '⚠️ Parcial';
+        statusEl.style.color = 'var(--orange-dark)';
+        renderAll();
+      } else {
+        statusEl.textContent = '⚡ Manual';
+        statusEl.style.color = 'var(--text-muted)';
+      }
+    } else {
+      statusEl.textContent = '⚡ Manual';
+      statusEl.style.color = 'var(--text-muted)';
     }
   } catch(e) {
-    console.log('Binance auto-fetch no disponible (necesita backend proxy):', e.message);
-  }
-
-  // === RESULTADO ===
-  if (bcvOk && binOk) {
-    statusEl.textContent = '✅ Tasas actualizadas';
-    statusEl.style.color = 'var(--green)';
-    renderAll();
-    showToast('✅ Tasas actualizadas automáticamente');
-  } else if (bcvOk || binOk) {
-    statusEl.textContent = '⚠️ Parcial — revisa manualmente';
-    statusEl.style.color = 'var(--orange-dark)';
-    renderAll();
-    showToast('⚠️ Solo se actualizó ' + (bcvOk?'BCV':'Binance') + ' — la otra ingresarla manual');
-  } else {
-    statusEl.textContent = '⚡ Manual — sin backend aún';
+    console.log('Auto-fetch error:', e.message);
+    statusEl.textContent = '⚡ Manual';
     statusEl.style.color = 'var(--text-muted)';
-    showToast('⚡ Auto-fetch necesita backend. Ingresa las tasas manualmente por ahora.');
   }
 }
 
-// Intentar auto-fetch al cargar la página
+// Auto-fetch al cargar
 setTimeout(fetchTasas, 1500);
-setTimeout(() => showToast('📋 Recuerda actualizar las tasas BCV y Binance del día'), 2500);
 
 // ===== ADD PRODUCT MODAL =====
 // ===== GENERIC INPUT MODAL =====
