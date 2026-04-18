@@ -1590,7 +1590,7 @@ margin-top: 6px;
   <div class="nav-tab active" data-tab="vendedor" onclick="switchTab('vendedor')">
     <span class="tab-icon">🏪</span>
     <div>VENDEDOR</div>
-    <span class="tab-name">Sra. Marbelis</span>
+    <span class="tab-name">Sra. Marbeyis</span>
   </div>
   <div class="nav-tab" data-tab="cliente" onclick="switchTab('cliente')" ondblclick="openClienteWindow()">
     <span class="tab-icon">🧾</span>
@@ -2620,7 +2620,7 @@ function calcSales(sales) {
 
 // ===== AUTH =====
 const CREDENTIALS = {
-  vendedor: { user: 'Marbelis', pass: '2557medina' },
+  vendedor: { user: 'Marbeyis', pass: '2557medina' },
   carlos:   { user: 'admin',   pass: '2557medina' }
 };
 
@@ -2707,7 +2707,7 @@ function renderAll() {
 function renderSaludo() {
   const h = new Date().getHours();
   const saludo = h < 12 ? 'Buenos días' : h < 18 ? 'Buenas tardes' : 'Buenas noches';
-  document.getElementById('saludo-hora').textContent = saludo + ', Sra. Marbelis';
+  document.getElementById('saludo-hora').textContent = saludo + ', Sra. Marbeyis';
   const dateEl = document.getElementById('header-date-display');
   if (dateEl) {
     const now = new Date();
@@ -2846,48 +2846,49 @@ function renderInventoryVendedor() {
 
 // ===== CLIENTE POPUP WINDOW =====
 let clienteWindow = null;
-const clienteChannel = new BroadcastChannel('automarbe-cliente');
+let clienteSyncInterval = null;
 
 function openClienteWindow() {
   if (clienteWindow && !clienteWindow.closed) { clienteWindow.focus(); return; }
   clienteWindow = window.open('', 'AutomarbeMostrador', 'width=1024,height=600,menubar=no,toolbar=no,location=no,status=no');
   if (!clienteWindow) { showToast('⚠️ Permite ventanas emergentes para el mostrador'); return; }
   
-  const styles = document.querySelectorAll('style');
-  let css = '';
-  styles.forEach(s => css += s.textContent);
   const linkFont = '<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">';
   
-  clienteWindow.document.write(`<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>AUTOMARBE — Mostrador</title>
-${linkFont}
-<style>
-${css}
-:root { --bg: #f5f5f5; --text-primary: #111; --text-secondary: #555; --text-muted: #999; --border: #e0e0e0; --border-light: #eee; --bg-card: #f9f9f9; --bg-white: #fff; --blue: #1E40AF; --blue-soft: rgba(30,64,175,0.08); --blue-dark: #1E3A8A; --green: #059669; --green-soft: rgba(5,150,105,0.08); --green-dark: #047857; --red: #DC2626; --red-soft: rgba(220,38,38,0.06); --orange: #FF9800; --orange-soft: rgba(255,152,0,0.08); --orange-dark: #E65100; --shadow-sm: 0 1px 3px rgba(0,0,0,0.06); --radius: 12px; --radius-sm: 8px; }
-body { margin: 0; padding: 0; background: #f5f5f5; font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden; height: 100vh; }
-.invoice-container { height: 100vh; display: flex; flex-direction: column; background: #fff; }
-.invoice-body { flex: 1; overflow-y: auto; }
-.thank-you-screen { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #fff; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.mono { font-family: 'JetBrains Mono', monospace; }
-</style></head><body>
-<div id="mostrador-root"></div>
-<scr` + `ipt>
-const ch = new BroadcastChannel('automarbe-cliente');
-ch.onmessage = function(e) {
-  document.getElementById('mostrador-root').innerHTML = e.data;
-};
-</scr` + `ipt></body></html>`);
+  clienteWindow.document.write('<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">' +
+    '<meta name="viewport" content="width=device-width,initial-scale=1.0">' +
+    '<title>AUTOMARBE — Mostrador</title>' + linkFont +
+    '<style>' +
+    'body{margin:0;padding:0;background:#f5f5f5;font-family:"Plus Jakarta Sans",sans-serif;overflow:hidden;height:100vh;}' +
+    '#mostrador-root{height:100vh;display:flex;flex-direction:column;}' +
+    '</style></head><body><div id="mostrador-root">Conectando...</div></body></html>');
   clienteWindow.document.close();
-  showToast('🖥️ Mostrador abierto — arrástralo al segundo monitor');
+  
+  // Start sync interval
+  if (clienteSyncInterval) clearInterval(clienteSyncInterval);
+  clienteSyncInterval = setInterval(syncClienteWindow, 500);
   syncClienteWindow();
+  showToast('🖥️ Mostrador abierto — arrástralo al segundo monitor');
 }
 
 function syncClienteWindow() {
-  const container = document.querySelector('.invoice-container');
-  if (container) {
-    clienteChannel.postMessage(container.outerHTML);
+  if (!clienteWindow || clienteWindow.closed) {
+    if (clienteSyncInterval) { clearInterval(clienteSyncInterval); clienteSyncInterval = null; }
+    clienteWindow = null;
+    return;
   }
+  try {
+    const container = document.querySelector('.invoice-container');
+    if (container) {
+      const styles = document.querySelectorAll('style');
+      let css = '';
+      styles.forEach(s => css += s.textContent);
+      const root = clienteWindow.document.getElementById('mostrador-root');
+      if (root) {
+        root.innerHTML = '<style>' + css + '.invoice-container{height:100vh;display:flex;flex-direction:column;background:#fff;}.invoice-body{flex:1;overflow-y:auto;}.thank-you-screen{position:absolute;top:0;left:0;right:0;bottom:0;background:#fff;z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;}.thank-you-screen.show{display:flex;}.mono{font-family:"JetBrains Mono",monospace;}</style>' + container.outerHTML;
+      }
+    }
+  } catch(e) { console.log('Sync error:', e); }
 }
 
 // ===== CLIENTE INVOICE =====
