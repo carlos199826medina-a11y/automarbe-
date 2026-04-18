@@ -429,117 +429,140 @@ margin: 0 auto;
 }
 
 .invoice-header {
-background: linear-gradient(135deg, #B91C1C 0%, #991B1B 100%);
+background: #0a0a0a;
 color: #fff;
-padding: 24px 32px;
+padding: 0;
 display: flex;
-justify-content: space-between;
-align-items: center;
+flex-direction: column;
+position: relative;
+overflow: hidden;
 }
-.invoice-header-left { }
-.invoice-logo { font-size: 28px; font-weight: 800; letter-spacing: 3px; }
-.invoice-subtitle { font-size: 15px; opacity: 0.8; margin-top: 2px; }
-.invoice-header-rif { font-size: 14px; opacity: 0.6; margin-top: 4px; }
+.invoice-header::before {
+content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+background: linear-gradient(90deg, #e94560, #FFD600, #e94560);
+}
+.invoice-header-top {
+display: flex; justify-content: space-between; align-items: center;
+padding: 10px 20px 6px;
+}
+.invoice-header-left { display: flex; align-items: center; gap: 0; }
+.invoice-logo {
+font-size: 24px; font-weight: 800; letter-spacing: 5px; color: #fff;
+position: relative; padding-right: 16px; margin-right: 16px;
+}
+.invoice-logo::after {
+content: ''; position: absolute; right: 0; top: -2px; bottom: -2px;
+width: 2px; background: linear-gradient(180deg, #e94560, #FFD600);
+}
+.invoice-header-info {
+font-size: 9px; color: rgba(255,255,255,0.4); line-height: 1.6; letter-spacing: 1px; text-transform: uppercase;
+}
+.invoice-header-info span { color: rgba(255,255,255,0.7); font-weight: 600; }
 .invoice-header-right { text-align: right; }
+.invoice-header-bottom {
+display: flex; justify-content: space-between; align-items: center;
+padding: 0 20px 8px; font-family: 'JetBrains Mono', monospace;
+}
+.invoice-header-meta { font-size: 10px; color: rgba(255,255,255,0.7); font-family: 'JetBrains Mono', monospace; }
 
-.invoice-body { padding: 28px 32px; }
+.invoice-body { padding: 10px 20px; }
 
 .invoice-ticket-bar {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 0 16px; border-bottom: 2px solid var(--border); margin-bottom: 20px;
+  padding: 6px 0 8px; border-bottom: 2px solid var(--border); margin-bottom: 8px;
 }
-.invoice-ticket-label { font-size: 14px; font-weight: 700; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; }
-.invoice-ticket-num { font-size: 28px; font-weight: 800; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; }
+.invoice-ticket-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; }
+.invoice-ticket-num { font-size: 22px; font-weight: 800; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; }
 
 .invoice-meta-section {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px;
-  margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
+  margin-bottom: 6px; padding: 4px 0 6px; border-bottom: 1px solid var(--border);
 }
 .invoice-meta-line {
-  display: flex; justify-content: space-between; font-size: 15px; color: var(--text-secondary); padding: 4px 0;
+  display: flex; justify-content: space-between; font-size: 12px; color: var(--text-secondary); padding: 1px 8px 1px 0;
 }
 .invoice-meta-line span:last-child { font-weight: 600; color: var(--text-primary); }
 
 .invoice-col-header {
   display: grid; grid-template-columns: 3fr 1fr 1fr 1fr;
-  gap: 8px; padding: 12px 0; border-bottom: 2px solid var(--text-primary); margin-bottom: 4px;
+  gap: 6px; padding: 6px 0; border-bottom: 2px solid var(--text-primary); margin-bottom: 2px;
 }
-.invoice-col-th { font-size: 13px; font-weight: 700; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; }
+.invoice-col-th { font-size: 12px; font-weight: 700; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; }
 .invoice-col-th.right { text-align: right; }
 .invoice-col-th.center { text-align: center; }
 
 .invoice-item-row {
   display: grid; grid-template-columns: 3fr 1fr 1fr 1fr;
-  gap: 8px; padding: 12px 0; border-bottom: 1px solid var(--border-light); align-items: center;
+  gap: 6px; padding: 6px 0; border-bottom: 1px solid var(--border-light); align-items: center;
 }
 .invoice-item-row:last-child { border-bottom: none; }
-.invoice-item-row:hover { background: var(--bg-card); margin: 0 -8px; padding-left: 8px; padding-right: 8px; border-radius: 6px; }
-.invoice-item-name { font-size: 16px; font-weight: 600; color: var(--text-primary); line-height: 1.3; }
-.invoice-item-type { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
-.invoice-item-cell { font-size: 16px; font-family: 'JetBrains Mono', monospace; color: var(--text-primary); }
+.invoice-item-row:hover { background: var(--bg-card); margin: 0 -6px; padding-left: 6px; padding-right: 6px; border-radius: 4px; }
+.invoice-item-name { font-size: 14px; font-weight: 600; color: var(--text-primary); line-height: 1.2; }
+.invoice-item-type { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+.invoice-item-cell { font-size: 14px; font-family: 'JetBrains Mono', monospace; color: var(--text-primary); }
 .invoice-item-cell.center { text-align: center; }
 .invoice-item-cell.right { text-align: right; font-weight: 600; }
 
-.invoice-items { min-height: 80px; }
-.invoice-empty { text-align: center; color: var(--text-muted); padding: 48px 0; font-size: 18px; }
-.invoice-empty .empty-icon { font-size: 48px; margin-bottom: 12px; display: block; opacity: 0.3; }
+.invoice-items { min-height: 40px; }
+.invoice-empty { text-align: center; color: var(--text-muted); padding: 20px 0; font-size: 15px; }
+.invoice-empty .empty-icon { font-size: 32px; margin-bottom: 6px; display: block; opacity: 0.3; }
 
-.invoice-items-count { text-align: right; font-size: 14px; color: var(--text-muted); padding-top: 8px; border-top: 1px solid var(--border-light); }
+.invoice-items-count { text-align: right; font-size: 12px; color: var(--text-muted); padding-top: 4px; border-top: 1px solid var(--border-light); }
 
 .invoice-totals {
-  border-top: 2px solid var(--border); padding: 16px 0; margin-top: 16px;
-  max-width: 350px; margin-left: auto;
+  border-top: 2px solid var(--border); padding: 8px 0; margin-top: 8px;
+  max-width: 320px; margin-left: auto;
 }
-.invoice-total-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 16px; color: var(--text-secondary); }
+.invoice-total-row { display: flex; justify-content: space-between; padding: 3px 0; font-size: 14px; color: var(--text-secondary); }
 .invoice-total-row strong { color: var(--text-primary); }
 .invoice-total-row.grand {
-  font-size: 22px; font-weight: 800; padding-top: 12px; margin-top: 8px;
+  font-size: 18px; font-weight: 800; padding-top: 8px; margin-top: 4px;
   border-top: 3px solid var(--text-primary); color: var(--text-primary);
 }
-.invoice-total-row.grand .bs-equiv { font-size: 15px; color: var(--text-muted); font-weight: 400; }
+.invoice-total-row.grand .bs-equiv { font-size: 13px; color: var(--text-muted); font-weight: 400; }
 
 .invoice-footer {
-  background: var(--bg-card); padding: 16px 32px; text-align: center;
+  background: var(--bg-card); padding: 8px 20px; text-align: center;
   border-top: 1px solid var(--border);
 }
-.invoice-footer-text { font-size: 14px; color: var(--text-muted); }
+.invoice-footer-text { font-size: 11px; color: var(--text-muted); }
 
 .invoice-subtotals {
-  border-top: 2px solid var(--border); padding: 12px 0; margin-top: 16px;
-  max-width: 380px; margin-left: auto;
+  border-top: 2px solid var(--border); padding: 6px 0; margin-top: 8px;
+  max-width: 320px; margin-left: auto;
 }
-.invoice-total-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 16px; color: var(--text-secondary); }
+.invoice-total-row { display: flex; justify-content: space-between; padding: 3px 0; font-size: 14px; color: var(--text-secondary); }
 
 .invoice-pay-box {
-  margin-top: 8px;
-  max-width: 380px;
+  margin-top: 6px;
+  max-width: 320px;
   margin-left: auto;
 }
 .invoice-pay-total {
   display: flex; justify-content: space-between; align-items: baseline;
-  padding: 16px 18px; border-radius: 10px;
+  padding: 10px 14px; border-radius: 8px;
   background: linear-gradient(135deg, #059669, #047857);
   color: #fff;
 }
-.invoice-pay-total-label { font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.8); letter-spacing: 2px; }
-.invoice-pay-total-amount { font-size: 28px; font-weight: 800; color: #fff; font-family: 'JetBrains Mono', monospace; text-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+.invoice-pay-total-label { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.8); letter-spacing: 2px; }
+.invoice-pay-total-amount { font-size: 22px; font-weight: 800; color: #fff; font-family: 'JetBrains Mono', monospace; text-shadow: 0 1px 4px rgba(0,0,0,0.15); }
 .invoice-pay-ref {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 14px 18px; background: linear-gradient(135deg, #1E40AF, #1E3A8A); border-radius: 10px; margin-top: 8px;
+  padding: 8px 14px; background: linear-gradient(135deg, #1E40AF, #1E3A8A); border-radius: 8px; margin-top: 6px;
   color: #fff;
 }
-.invoice-pay-ref-label { font-size: 13px; color: rgba(255,255,255,0.7); letter-spacing: 1px; }
-.invoice-pay-ref-amount { font-size: 22px; font-weight: 800; color: #fff; font-family: 'JetBrains Mono', monospace; text-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+.invoice-pay-ref-label { font-size: 11px; color: rgba(255,255,255,0.7); letter-spacing: 1px; }
+.invoice-pay-ref-amount { font-size: 18px; font-weight: 800; color: #fff; font-family: 'JetBrains Mono', monospace; text-shadow: 0 1px 4px rgba(0,0,0,0.15); }
 .invoice-pay-method {
-  text-align: right; margin-top: 8px;
-  font-size: 14px; color: var(--text-muted);
+  text-align: right; margin-top: 4px;
+  font-size: 12px; color: var(--text-muted);
 }
 
 /* Thank you screen */
 .thank-you-screen {
 display: none;
 text-align: center;
-padding: 30px 20px;
+padding: 15px 20px;
 animation: thankYouIn 0.6s ease;
 }
 
@@ -551,13 +574,13 @@ animation: thankYouIn 0.6s ease;
 100% { opacity: 1; transform: scale(1); }
 }
 
-.thank-you-icon { font-size: 60px; margin-bottom: 12px; animation: pulse 1.5s ease infinite; }
+.thank-you-icon { font-size: 40px; margin-bottom: 6px; animation: pulse 1.5s ease infinite; }
 @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
-.thank-you-title { font-size: 24px; font-weight: 800; color: var(--green-dark); margin-bottom: 6px; }
-.thank-you-sub { font-size: 16px; color: var(--text-secondary); margin-bottom: 4px; }
-.thank-you-total { font-size: 26px; font-weight: 800; color: var(--text-primary); margin: 12px 0; }
-.thank-you-brand { font-size: 16px; color: var(--text-muted); margin-top: 16px; letter-spacing: 1px; font-weight: 600; }
+.thank-you-title { font-size: 20px; font-weight: 800; color: var(--green-dark); margin-bottom: 4px; }
+.thank-you-sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 3px; }
+.thank-you-total { font-size: 22px; font-weight: 800; color: var(--text-primary); margin: 8px 0; }
+.thank-you-brand { font-size: 13px; color: var(--text-muted); margin-top: 8px; letter-spacing: 1px; font-weight: 600; }
 
 /* ===== ADMIN CARDS ===== */
 .admin-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 16px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-top: 4px; }
@@ -1202,13 +1225,13 @@ margin-top: 6px;
 }
 
 /* HUD Audit */
-.hud-audit .hud-audit-row {
+.hud-audit-row {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 8px 0; border-bottom: 1px solid var(--border-light);
+  padding: 8px 0; border-bottom: 1px solid var(--border-light); gap: 16px;
 }
-.hud-audit .hud-audit-row:last-child { border-bottom: none; }
-.hud-audit-label { font-size: 15px; color: var(--text-secondary); }
-.hud-audit-value { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+.hud-audit-row:last-child { border-bottom: none; }
+.hud-audit-label { font-size: 14px; color: var(--text-secondary); flex: 1; min-width: 0; }
+.hud-audit-value { font-size: 15px; font-weight: 700; color: var(--text-primary); text-align: right; white-space: nowrap; flex-shrink: 0; }
 
 /* HUD Sales Log */
 .hud-screen .sale-row {
@@ -1558,7 +1581,6 @@ margin-top: 6px;
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 </style>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -1570,7 +1592,7 @@ margin-top: 6px;
     <div>VENDEDOR</div>
     <span class="tab-name">Sra. Marbelis</span>
   </div>
-  <div class="nav-tab" data-tab="cliente" onclick="switchTab('cliente')">
+  <div class="nav-tab" data-tab="cliente" onclick="switchTab('cliente')" ondblclick="openClienteWindow()">
     <span class="tab-icon">🧾</span>
     <div>CLIENTE</div>
     <span class="tab-name">Mostrador</span>
@@ -1837,25 +1859,21 @@ margin-top: 6px;
 <div id="screen-cliente" class="screen">
   <div class="invoice-container">
     <div class="invoice-header">
-      <div class="invoice-header-left">
-        <div class="invoice-logo">AUTOMARBE</div>
-        <div class="invoice-subtitle">Lubricantes & Aceites</div>
-        <div class="invoice-header-rif">RIF: J-00000000-0 • Venezuela</div>
+      <div class="invoice-header-top">
+        <div class="invoice-header-left">
+          <div class="invoice-logo">AUTOMARBE</div>
+          <div class="invoice-header-info"><span>Lubricantes & Aceites</span><br>RIF: J-50416359-7</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:20px;font-weight:800;font-family:'JetBrains Mono',monospace;color:#e94560;letter-spacing:2px;" id="ticket-number-header"></div>
+        </div>
       </div>
-      <div class="invoice-header-right">
-        <div style="font-size:14px;opacity:0.7;">FACTURA ELECTRÓNICA</div>
-        <div style="font-size:32px;font-weight:800;font-family:'JetBrains Mono',monospace;" id="ticket-number-header"></div>
+      <div class="invoice-header-bottom">
+        <div style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;"><span id="invoice-date"></span> · <span id="invoice-time"></span></div>
+        <div style="font-size:12px;color:#FFD600;font-weight:800;letter-spacing:2px;">TASA: <span id="invoice-tasa"></span> Bs/$</div>
       </div>
     </div>
     <div class="invoice-body" id="invoice-body">
-
-      <!-- Meta info -->
-      <div class="invoice-meta-section">
-        <div class="invoice-meta-line"><span>Fecha</span><span id="invoice-date"></span></div>
-        <div class="invoice-meta-line"><span>Hora</span><span id="invoice-time"></span></div>
-        <div class="invoice-meta-line"><span>Tasa BCV</span><span id="invoice-tasa"></span></div>
-        <div class="invoice-meta-line"><span>Cliente</span><span>Consumidor Final</span></div>
-      </div>
 
       <!-- Items -->
       <div class="invoice-items" id="invoice-items">
@@ -2226,11 +2244,6 @@ margin-top: 6px;
       <div id="contador-gastos"></div>
     </div>
 
-    <div style="text-align:center;margin-top:12px;">
-      <button onclick="exportarPDFContador()" style="padding:10px 24px;border:2px solid #FF1744;border-radius:10px;background:var(--red-soft);color:var(--red);font-size:14px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">📄 Exportar PDF para el Contador</button>
-      <div style="font-size:8px;color:var(--text-muted);margin-top:4px;">Genera un PDF descargable con todos los datos</div>
-    </div>
-
   </div>
 
 </div>
@@ -2356,7 +2369,7 @@ const sb = {
 const db = {
   async loadAll() {
     try {
-      const [prodD, ventD, compD, cfD, cvD, mcD, ccD, cpD, cbpD, confD, cjD] = await Promise.all([
+      const [prodD, ventD, compD, cfD, cvD, mcD, ccD, cpD, cbpD, confD, cjD, cfiscD] = await Promise.all([
         sb.get('productos', 'order=id.asc'),
         sb.get('ventas', 'order=created_at.desc'),
         sb.get('compras_inventario', 'order=created_at.desc'),
@@ -2367,7 +2380,8 @@ const db = {
         sb.get('cuentas_pagar'),
         sb.get('cobros_pagos', 'order=created_at.desc'),
         sb.get('configuracion'),
-        sb.get('cierres_caja')
+        sb.get('cierres_caja'),
+        sb.get('cierres_fiscales', 'order=year.asc')
       ]);
 
       if (prodD.length) {
@@ -2425,6 +2439,10 @@ const db = {
         cierresCaja = {};
         cjD.forEach(c => { cierresCaja[c.date] = {usd_real:c.usd_real, bs_real:c.bs_real, movil_real:c.movil_real}; });
       }
+      if (cfiscD && cfiscD.length) {
+        cierresFiscales.length = 0;
+        cfiscD.forEach(c => cierresFiscales.push({year:c.year, fechaCierre:c.fecha_cierre, ingresos:Number(c.ingresos), costos:Number(c.costos), baseImponible:Number(c.base_imponible), ivaDebito:Number(c.iva_debito), ivaCredito:Number(c.iva_credito), gananciaBruta:Number(c.ganancia_bruta), gastosOp:Number(c.gastos_op), gananciaNeta:Number(c.ganancia_neta), islrEstimado:Number(c.islr_estimado), retiros:Number(c.retiros), aportes:Number(c.aportes), dividendos:Number(c.dividendos), operaciones:c.operaciones, unidades:c.unidades, monthlyIngresos:c.monthly_ingresos?JSON.parse(c.monthly_ingresos):[], inpcInicio:Number(c.inpc_inicio), inpcCierre:Number(c.inpc_cierre), inventarioInicio:Number(c.inventario_inicio), ajusteInflacion:Number(c.ajuste_inflacion)}));
+      }
       console.log('DB loaded: ' + PRODUCTS.length + ' productos, ' + salesHistory.length + ' ventas');
       return true;
     } catch(e) { console.error('DB load error:', e); return false; }
@@ -2478,7 +2496,10 @@ const db = {
     if (d) c.id = d.id;
   },
   async saveConfig(key, value) { await sb.upsert('configuracion', {key, value: String(value), updated_at: new Date().toISOString()}); },
-  async saveCierre(date, data) { await sb.upsert('cierres_caja', {date, ...data}); }
+  async saveCierre(date, data) { await sb.upsert('cierres_caja', {date, ...data}); },
+  async saveCierreFiscal(c) {
+    await sb.insert('cierres_fiscales', {year:c.year, fecha_cierre:c.fechaCierre, ingresos:c.ingresos, costos:c.costos, base_imponible:c.baseImponible, iva_debito:c.ivaDebito, iva_credito:c.ivaCredito, ganancia_bruta:c.gananciaBruta, gastos_op:c.gastosOp, ganancia_neta:c.gananciaNeta, islr_estimado:c.islrEstimado, retiros:c.retiros, aportes:c.aportes, dividendos:c.dividendos, operaciones:c.operaciones, unidades:c.unidades, monthly_ingresos:JSON.stringify(c.monthlyIngresos), inpc_inicio:c.inpcInicio, inpc_cierre:c.inpcCierre, inventario_inicio:c.inventarioInicio, ajuste_inflacion:c.ajusteInflacion});
+  }
 };
 
 // ===== DATA =====
@@ -2823,6 +2844,52 @@ function renderInventoryVendedor() {
   `;
 }
 
+// ===== CLIENTE POPUP WINDOW =====
+let clienteWindow = null;
+const clienteChannel = new BroadcastChannel('automarbe-cliente');
+
+function openClienteWindow() {
+  if (clienteWindow && !clienteWindow.closed) { clienteWindow.focus(); return; }
+  clienteWindow = window.open('', 'AutomarbeMostrador', 'width=1024,height=600,menubar=no,toolbar=no,location=no,status=no');
+  if (!clienteWindow) { showToast('⚠️ Permite ventanas emergentes para el mostrador'); return; }
+  
+  const styles = document.querySelectorAll('style');
+  let css = '';
+  styles.forEach(s => css += s.textContent);
+  const linkFont = '<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">';
+  
+  clienteWindow.document.write(`<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AUTOMARBE — Mostrador</title>
+${linkFont}
+<style>
+${css}
+:root { --bg: #f5f5f5; --text-primary: #111; --text-secondary: #555; --text-muted: #999; --border: #e0e0e0; --border-light: #eee; --bg-card: #f9f9f9; --bg-white: #fff; --blue: #1E40AF; --blue-soft: rgba(30,64,175,0.08); --blue-dark: #1E3A8A; --green: #059669; --green-soft: rgba(5,150,105,0.08); --green-dark: #047857; --red: #DC2626; --red-soft: rgba(220,38,38,0.06); --orange: #FF9800; --orange-soft: rgba(255,152,0,0.08); --orange-dark: #E65100; --shadow-sm: 0 1px 3px rgba(0,0,0,0.06); --radius: 12px; --radius-sm: 8px; }
+body { margin: 0; padding: 0; background: #f5f5f5; font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden; height: 100vh; }
+.invoice-container { height: 100vh; display: flex; flex-direction: column; background: #fff; }
+.invoice-body { flex: 1; overflow-y: auto; }
+.thank-you-screen { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #fff; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+</style></head><body>
+<div id="mostrador-root"></div>
+<scr` + `ipt>
+const ch = new BroadcastChannel('automarbe-cliente');
+ch.onmessage = function(e) {
+  document.getElementById('mostrador-root').innerHTML = e.data;
+};
+</scr` + `ipt></body></html>`);
+  clienteWindow.document.close();
+  showToast('🖥️ Mostrador abierto — arrástralo al segundo monitor');
+  syncClienteWindow();
+}
+
+function syncClienteWindow() {
+  const container = document.querySelector('.invoice-container');
+  if (container) {
+    clienteChannel.postMessage(container.outerHTML);
+  }
+}
+
 // ===== CLIENTE INVOICE =====
 function renderClienteInvoice() {
   const now = new Date();
@@ -2892,6 +2959,7 @@ function renderClienteInvoice() {
       totalsSection.style.display = 'block';
     }
   }
+  syncClienteWindow();
 }
 
 function showThankYou(total, method) {
@@ -2902,6 +2970,7 @@ function showThankYou(total, method) {
   document.getElementById('invoice-body').style.display = 'none';
   document.querySelector('.invoice-footer').style.display = 'none';
   ty.classList.add('show');
+  syncClienteWindow();
   if (thankYouTimer) clearTimeout(thankYouTimer);
   thankYouTimer = setTimeout(() => {
     ty.classList.remove('show');
@@ -3252,8 +3321,8 @@ function renderResCalendario() {
     </div>
     <div class="res-cal-days">${daysHtml}</div>
     <div style="display:flex;justify-content:center;gap:14px;margin-top:8px;">
-      <div style="display:flex;align-items:center;gap:4px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;"></span><span style="font-size:8px;color:var(--text-muted);">Con ventas</span></div>
-      <div style="display:flex;align-items:center;gap:4px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block;"></span><span style="font-size:8px;color:var(--text-muted);">Caja cerrada</span></div>
+      <div style="display:flex;align-items:center;gap:4px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;"></span><span style="font-size:11px;color:var(--text-muted);">Con ventas</span></div>
+      <div style="display:flex;align-items:center;gap:4px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block;"></span><span style="font-size:11px;color:var(--text-muted);">Caja cerrada</span></div>
     </div>
   `;
 }
@@ -4431,12 +4500,12 @@ function renderIntelligence() {
       <div style="display:flex;gap:10px;margin-bottom:14px;">
         <div style="flex:1;background:rgba(37,99,235,0.05);border:1px solid rgba(37,99,235,0.1);border-radius:8px;padding:10px;text-align:center;">
           <div style="font-size:18px;font-weight:800;color:var(--blue);font-family:'JetBrains Mono',monospace;">${pctUSD.toFixed(0)}%</div>
-          <div style="font-size:8px;color:var(--text-muted);font-weight:600;letter-spacing:1px;">VENTAS EN USD</div>
+          <div style="font-size:11px;color:var(--text-muted);font-weight:600;letter-spacing:1px;">VENTAS EN USD</div>
           <div style="font-size:14px;color:var(--text-muted);margin-top:2px;">$${usdLiquid.toFixed(0)}</div>
         </div>
         <div style="flex:1;background:rgba(255,184,0,0.05);border:1px solid rgba(255,184,0,0.1);border-radius:8px;padding:10px;text-align:center;">
           <div style="font-size:18px;font-weight:800;color:var(--orange-dark);font-family:'JetBrains Mono',monospace;">${pctBs.toFixed(0)}%</div>
-          <div style="font-size:8px;color:var(--text-muted);font-weight:600;letter-spacing:1px;">VENTAS EN Bs</div>
+          <div style="font-size:11px;color:var(--text-muted);font-weight:600;letter-spacing:1px;">VENTAS EN Bs</div>
           <div style="font-size:14px;color:var(--text-muted);margin-top:2px;">$${bsLiquidUSD.toFixed(0)} (${bsLiquidBs.toFixed(0)} Bs)</div>
         </div>
       </div>
@@ -5500,11 +5569,11 @@ function renderFiscal() {
     <div class="hud-audit-row"><span class="hud-audit-label">Base imponible (sin IVA)</span><span class="hud-audit-value mono" style="color:var(--text-secondary)">$${baseImponibleAnual.toFixed(2)}</span></div>
     <div class="hud-audit-row" style="background:var(--orange-soft);margin:4px -10px;padding:8px 10px;border-radius:6px;border:1px solid var(--orange);">
       <span class="hud-audit-label" style="color:var(--orange-dark);font-weight:600;">IVA 16% débito fiscal del año</span>
-      <span class="hud-audit-value mono" style="color:var(--orange-dark);">${ivaDebitoAnualBs.toFixed(0)} Bs <span style="font-size:11px;opacity:0.7;">≈$${ivaDebitoAnual.toFixed(2)}</span></span>
+      <span class="hud-audit-value mono" style="color:var(--orange-dark);"><span style="display:block;">${ivaDebitoAnualBs.toFixed(0)} Bs</span><span style="font-size:11px;opacity:0.7;">≈$${ivaDebitoAnual.toFixed(2)}</span></span>
     </div>
     <div class="hud-audit-row">
       <span class="hud-audit-label" style="color:var(--green-dark);">IVA crédito fiscal del año</span>
-      <span class="hud-audit-value mono" style="color:var(--green-dark);">${ivaCreditoAnualBs.toFixed(0)} Bs <span style="font-size:11px;opacity:0.7;">≈$${ivaCreditoAnual.toFixed(2)}</span></span>
+      <span class="hud-audit-value mono" style="color:var(--green-dark);"><span style="display:block;">${ivaCreditoAnualBs.toFixed(0)} Bs</span><span style="font-size:11px;opacity:0.7;">≈$${ivaCreditoAnual.toFixed(2)}</span></span>
     </div>
     <div class="hud-audit-row">
       <span class="hud-audit-label">IVA neto a pagar al SENIAT</span>
@@ -5512,13 +5581,13 @@ function renderFiscal() {
     </div>
     <div class="hud-audit-row"><span class="hud-audit-label">Costos de mercancia vendida</span><span class="hud-audit-value mono" style="color:var(--red)">$${costosAnual.toFixed(2)}</span></div>
     <div class="hud-audit-row" style="background:var(--green-soft);margin:4px -10px;padding:8px 10px;border-radius:6px;border:1px solid var(--green);">
-      <span class="hud-audit-label" style="color:var(--green-dark);font-weight:600;">Ganancia Bruta <span style="font-size:8px;opacity:0.4;">(sin descontar gastos)</span></span>
-      <span class="hud-audit-value mono" style="color:var(--green-dark);">$${gananciaBrutaAnual.toFixed(2)} <span style="font-size:16px;opacity:0.5;">(${margenBruto}%)</span></span>
+      <span class="hud-audit-label" style="color:var(--green-dark);font-weight:600;">Ganancia Bruta <span style="font-size:11px;opacity:0.5;">(sin descontar gastos)</span></span>
+      <span class="hud-audit-value mono" style="color:var(--green-dark);"><span style="display:block;">$${gananciaBrutaAnual.toFixed(2)}</span><span style="font-size:12px;opacity:0.5;">(${margenBruto}%)</span></span>
     </div>
     <div class="hud-audit-row"><span class="hud-audit-label">Gastos operacionales del año</span><span class="hud-audit-value mono" style="color:var(--red)">$${gastosOpAnual.toFixed(2)}</span></div>
     <div class="hud-audit-row" style="background:var(--blue-soft);margin:4px -10px;padding:8px 10px;border-radius:6px;border:1px solid var(--blue);">
-      <span class="hud-audit-label" style="color:var(--blue);font-weight:600;">Ganancia Neta <span style="font-size:8px;opacity:0.4;">(despues de todos los gastos)</span></span>
-      <span class="hud-audit-value mono" style="color:${gananciaNetaAnual>=0?'var(--blue)':'#FF1744'};">$${gananciaNetaAnual.toFixed(2)} <span style="font-size:16px;opacity:0.5;">(${margenNeto}%)</span></span>
+      <span class="hud-audit-label" style="color:var(--blue);font-weight:600;">Ganancia Neta <span style="font-size:11px;opacity:0.5;">(despues de todos los gastos)</span></span>
+      <span class="hud-audit-value mono" style="color:${gananciaNetaAnual>=0?'var(--blue)':'#FF1744'};"><span style="display:block;">$${gananciaNetaAnual.toFixed(2)}</span><span style="font-size:12px;opacity:0.5;">(${margenNeto}%)</span></span>
     </div>
     <div style="border-top:1px solid var(--border);margin:8px -10px;padding:8px 10px 0;">
       <div class="hud-audit-row"><span class="hud-audit-label">Compras de inventario</span><span class="hud-audit-value mono">$${inversionAnual.toFixed(2)}</span></div>
@@ -5594,13 +5663,13 @@ function renderFiscal() {
     <div style="margin-bottom:12px;">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
         <div>
-          <div style="font-size:8px;color:var(--text-muted);margin-bottom:3px;">INPC Inicio del año</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px;">INPC Inicio del año</div>
           <input type="number" step="0.01" value="${inpcInicio || ''}" placeholder="Ej: 1523.40"
             onchange="inpcInicio=parseFloat(this.value)||0;renderFiscal()"
             style="width:100%;padding:8px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;color:#fff;font-family:'JetBrains Mono',monospace;font-size:16px;">
         </div>
         <div>
-          <div style="font-size:8px;color:var(--text-muted);margin-bottom:3px;">INPC Cierre del año</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px;">INPC Cierre del año</div>
           <input type="number" step="0.01" value="${inpcCierre || ''}" placeholder="Ej: 8756.20"
             onchange="inpcCierre=parseFloat(this.value)||0;renderFiscal()"
             style="width:100%;padding:8px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;color:#fff;font-family:'JetBrains Mono',monospace;font-size:16px;">
@@ -5608,7 +5677,7 @@ function renderFiscal() {
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--bg-card);border-radius:6px;border:1px solid var(--border-light);">
         <div>
-          <div style="font-size:8px;color:var(--text-muted);">Inventario al inicio del año</div>
+          <div style="font-size:11px;color:var(--text-muted);">Inventario al inicio del año</div>
           <div style="font-size:16px;color:var(--text-muted);margin-top:1px;">Capturado automaticamente</div>
         </div>
         <span style="font-size:16px;font-weight:700;color:var(--blue);font-family:'JetBrains Mono',monospace;">$${invInicioVal.toFixed(2)}</span>
@@ -5620,17 +5689,17 @@ function renderFiscal() {
         <div style="font-size:16px;font-weight:700;color:var(--orange-dark);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Resultado del Ajuste</div>
         <div class="hud-audit-row"><span class="hud-audit-label">Inflacion del periodo</span><span class="hud-audit-value mono" style="color:var(--red)">${variacionPct.toFixed(1)}%</span></div>
         <div class="hud-audit-row"><span class="hud-audit-label">Inventario inicio</span><span class="hud-audit-value mono">$${invInicioVal.toFixed(2)}</span></div>
-        <div class="hud-audit-row"><span class="hud-audit-label">Perdida por inflacion (no es ganancia real)</span><span class="hud-audit-value mono" style="color:var(--red)">$${ajusteInventario.toFixed(2)}</span></div>
+        <div class="hud-audit-row"><span class="hud-audit-label">Perdida por inflacion</span><span class="hud-audit-value mono" style="color:var(--red)">$${ajusteInventario.toFixed(2)}</span></div>
       </div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
         <div style="text-align:center;padding:10px;background:var(--red-soft);border-radius:8px;border:1px solid var(--red);">
-          <div style="font-size:8px;color:var(--text-muted);margin-bottom:4px;">SIN ajuste</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">SIN ajuste</div>
           <div style="font-size:14px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">Ganancia: $${gananciaSinAjuste.toFixed(2)}</div>
           <div style="font-size:16px;font-weight:800;color:var(--red);font-family:'JetBrains Mono',monospace;">ISLR: $${islrSinAjuste.toFixed(2)}</div>
         </div>
         <div style="text-align:center;padding:10px;background:var(--green-soft);border-radius:8px;border:1px solid var(--green);">
-          <div style="font-size:8px;color:var(--text-muted);margin-bottom:4px;">CON ajuste</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">CON ajuste</div>
           <div style="font-size:14px;color:var(--green-dark);font-family:'JetBrains Mono',monospace;">Ganancia: $${gananciaConAjuste.toFixed(2)}</div>
           <div style="font-size:16px;font-weight:800;color:var(--green-dark);font-family:'JetBrains Mono',monospace;">ISLR: $${islrConAjuste.toFixed(2)}</div>
         </div>
@@ -5638,17 +5707,17 @@ function renderFiscal() {
 
       <div style="text-align:center;margin-top:10px;padding:8px;background:var(--green-soft);border-radius:6px;border:1px solid var(--green);">
         <span style="font-size:16px;font-weight:700;color:var(--green-dark);">Ahorro estimado: $${ahorro.toFixed(2)}</span>
-        <div style="font-size:8px;color:var(--text-muted);margin-top:2px;">Dinero que se queda en el negocio legalmente</div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Dinero que se queda en el negocio legalmente</div>
       </div>
     ` : `
       <div style="text-align:center;padding:20px 0;color:var(--text-muted);font-size:16px;">
         <div style="font-size:14px;margin-bottom:6px;">📊</div>
         Ingresa el INPC de inicio y cierre del año<br>(publicado por el BCV) para calcular el ajuste.
-        <div style="margin-top:8px;font-size:8px;color:var(--text-muted);">Consulta: bcv.org.ve → Estadisticas → INPC</div>
+        <div style="margin-top:8px;font-size:11px;color:var(--text-muted);">Consulta: bcv.org.ve → Estadisticas → INPC</div>
       </div>
     `}
 
-    <div style="font-size:8px;color:var(--text-muted);margin-top:8px;text-align:center;">
+    <div style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:center;">
       Estimador simplificado. El calculo oficial completo del API debe hacerlo un contador con todos los activos y pasivos no monetarios.
     </div>
   `;
@@ -5695,7 +5764,7 @@ function renderFiscal() {
         <polyline points="${pts2}" fill="none" stroke="var(--blue)" stroke-width="2"/>
         ${months.map((m,i) => `<text x="${(i/11)*chartW}" y="${chartH+15}" text-anchor="middle" font-size="7" fill="var(--text-muted)">${m}</text>`).join('')}
       </svg>
-      <div style="text-align:center;font-size:8px;color:var(--text-muted);margin-top:4px;">Ingresos mensuales — comparativa</div>
+      <div style="text-align:center;font-size:11px;color:var(--text-muted);margin-top:4px;">Ingresos mensuales — comparativa</div>
     `;
   }
 
@@ -5744,7 +5813,7 @@ function renderFiscal() {
       " ${mesActualNum===11?'':'disabled'}>
         🔒 Cerrar Año Fiscal ${yr}
       </button>
-      <div style="font-size:8px;color:var(--text-muted);margin-top:6px;">
+      <div style="font-size:11px;color:var(--text-muted);margin-top:6px;">
         ${mesActualNum===11?'Diciembre — puedes cerrar el año fiscal ahora':'Disponible solo en diciembre'}
       </div>
     </div>
@@ -5781,7 +5850,7 @@ function cerrarAnoFiscal() {
       monthlyIngresos.push(salesHistory.filter(s => getMonthKey(s.date)===mk).reduce((a,s)=>a+s.price*s.qty,0));
     }
 
-    cierresFiscales.push({
+    const cierreData = {
       year: yr,
       fechaCierre: today(),
       ingresos: ingresosAnual,
@@ -5803,7 +5872,9 @@ function cerrarAnoFiscal() {
       inpcCierre: inpcCierre,
       inventarioInicio: inventarioInicioAno,
       ajusteInflacion: (inpcInicio > 0 && inpcCierre > 0) ? inventarioInicioAno * ((inpcCierre/inpcInicio) - 1) : 0
-    });
+    };
+    cierresFiscales.push(cierreData);
+    db.saveCierreFiscal(cierreData);
 
     // Reset para nuevo año
     inventarioInicioAno = PRODUCTS.reduce((a,p) => a + p.cost * p.stock, 0);
@@ -5864,18 +5935,18 @@ function renderContador() {
   const units = sales.reduce((a,s) => a+s.qty, 0);
 
   document.getElementById('contador-resumen').innerHTML = `
-    <div style="font-size:16px;line-height:2;">
+    <div style="font-size:15px;">
       <div class="hud-audit-row"><span class="hud-audit-label">Ingresos brutos</span><span class="hud-audit-value mono" style="color:var(--blue)">$${ingresos.toFixed(2)}</span></div>
       <div class="hud-audit-row"><span class="hud-audit-label">Base imponible (sin IVA)</span><span class="hud-audit-value mono">$${base.toFixed(2)}</span></div>
       <div class="hud-audit-row"><span class="hud-audit-label">IVA debito (ventas)</span><span class="hud-audit-value mono" style="color:var(--orange-dark)">$${ivaDebito.toFixed(2)}</span></div>
       <div class="hud-audit-row"><span class="hud-audit-label">IVA credito (compras + gastos)</span><span class="hud-audit-value mono" style="color:var(--green-dark)">$${ivaCreditoTotal.toFixed(2)}</span></div>
       <div class="hud-audit-row"><span class="hud-audit-label">IVA neto a pagar</span><span class="hud-audit-value mono" style="color:var(--orange-dark)">$${ivaNeto.toFixed(2)}</span></div>
-      <div style="border-top:1px solid var(--border);margin:4px 0;"></div>
+      <div style="border-top:1px solid var(--border);margin:6px 0;"></div>
       <div class="hud-audit-row"><span class="hud-audit-label">Costos de mercancia</span><span class="hud-audit-value mono" style="color:var(--red)">$${costos.toFixed(2)}</span></div>
       <div class="hud-audit-row"><span class="hud-audit-label">Gastos operacionales</span><span class="hud-audit-value mono" style="color:var(--red)">$${gastosOp.toFixed(2)}</span></div>
       <div class="hud-audit-row"><span class="hud-audit-label">Ganancia Bruta</span><span class="hud-audit-value mono" style="color:var(--green-dark)">$${gBruta.toFixed(2)}</span></div>
       <div class="hud-audit-row"><span class="hud-audit-label">Ganancia Neta</span><span class="hud-audit-value mono" style="color:${gNeta>=0?'var(--blue)':'#FF1744'}">$${gNeta.toFixed(2)}</span></div>
-      <div style="border-top:1px solid var(--border);margin:4px 0;"></div>
+      <div style="border-top:1px solid var(--border);margin:6px 0;"></div>
       <div class="hud-audit-row"><span class="hud-audit-label">Operaciones / Unidades</span><span class="hud-audit-value">${ops} ops · ${units} und</span></div>
     </div>
   `;
@@ -5885,7 +5956,7 @@ function renderContador() {
     document.getElementById('contador-compras').innerHTML = '<div style="text-align:center;color:var(--text-muted);font-size:16px;padding:12px;">Sin compras en este periodo</div>';
   } else {
     document.getElementById('contador-compras').innerHTML = compras.map(c =>
-      `<div class="hud-audit-row"><span class="hud-audit-label">${formatDate(c.date)} · ${c.product} x${c.qty}</span><span class="hud-audit-value mono">$${c.totalUSD.toFixed(2)} <span style="font-size:8px;color:var(--orange-dark);">(IVA: $${(c.ivaCredito||0).toFixed(2)})</span></span></div>`
+      `<div class="hud-audit-row"><span class="hud-audit-label" style="font-size:13px;">${formatDate(c.date)} · ${c.product} x${c.qty}</span><span class="hud-audit-value mono" style="font-size:14px;">$${c.totalUSD.toFixed(2)} <span style="font-size:10px;color:var(--orange-dark);display:block;">(IVA: $${(c.ivaCredito||0).toFixed(2)})</span></span></div>`
     ).join('');
   }
 
@@ -5898,149 +5969,11 @@ function renderContador() {
     document.getElementById('contador-gastos').innerHTML = '<div style="text-align:center;color:var(--text-muted);font-size:16px;padding:12px;">Sin gastos registrados</div>';
   } else {
     document.getElementById('contador-gastos').innerHTML = gastosAll.map(g =>
-      `<div class="hud-audit-row"><span class="hud-audit-label">${g.name}${g.conIva?' ✓IVA':''}</span><span class="hud-audit-value mono">$${g.amount.toFixed(2)} ${g.conIva?'<span style="font-size:8px;color:var(--orange-dark);">(IVA: $'+g.iva.toFixed(2)+')</span>':''}</span></div>`
+      `<div class="hud-audit-row"><span class="hud-audit-label" style="font-size:13px;">${g.name}${g.conIva?' ✓IVA':''}</span><span class="hud-audit-value mono" style="font-size:14px;">$${g.amount.toFixed(2)} ${g.conIva?'<span style="font-size:10px;color:var(--orange-dark);display:block;">(IVA: $'+g.iva.toFixed(2)+')</span>':''}</span></div>`
     ).join('');
   }
 }
 
-function exportarPDFContador() {
-  const { jsPDF } = window.jspdf;
-  if (!jsPDF) return showToast('Error cargando libreria PDF');
-  const doc = new jsPDF({ unit: 'mm', format: 'letter' });
-  const yr = String(new Date().getFullYear());
-  const mes = getMonthKey(today());
-  const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  const isAnual = contadorPeriod === 'anual';
-  const label = isAnual ? 'Ano '+yr : monthNames[new Date().getMonth()]+' '+yr;
-
-  const sales = isAnual ? salesHistory.filter(s => s.date && s.date.startsWith(yr)) : salesHistory.filter(s => getMonthKey(s.date) === mes);
-  const compras = isAnual ? comprasInventario.filter(c => c.date && c.date.startsWith(yr)) : comprasInventario.filter(c => getMonthKey(c.date) === mes);
-  const varsP = isAnual ? costesVariables.filter(c => c.date && c.date.startsWith(yr)) : costesVariables.filter(c => getMonthKey(c.date) === mes);
-
-  const ingresos = sales.reduce((a,s) => a + s.price*s.qty, 0);
-  const costos = sales.reduce((a,s) => a + s.cost*s.qty, 0);
-  const base = ingresos / 1.16;
-  const ivaDebito = ingresos - base;
-  const gBruta = base - costos;
-  const fijos = isAnual ? costesFijos.reduce((a,c) => a + c.amount, 0) * 12 : costesFijos.reduce((a,c) => a + c.amount, 0);
-  const vars = varsP.reduce((a,c) => a + c.amount, 0);
-  const gastosOp = fijos + vars;
-  const gNeta = gBruta - gastosOp;
-  const ivaCreditoComp = compras.reduce((a,c) => a + (c.ivaCredito || 0), 0);
-  const ivaCreditoFij = isAnual ? costesFijos.reduce((a,c) => a + (c.ivaCredito || 0), 0) * 12 : costesFijos.reduce((a,c) => a + (c.ivaCredito || 0), 0);
-  const ivaCreditoVar = varsP.reduce((a,c) => a + (c.ivaCredito || 0), 0);
-  const ivaCreditoTotal = ivaCreditoComp + ivaCreditoFij + ivaCreditoVar;
-  const ivaNeto = Math.max(0, ivaDebito - ivaCreditoTotal);
-
-  let y = 20;
-  const lm = 20; const rm = 190;
-
-  // Header
-  doc.setFillColor(26, 26, 46);
-  doc.rect(0, 0, 216, 35, 'F');
-  doc.setTextColor(255, 23, 68);
-  doc.setFontSize(18); doc.setFont('helvetica','bold');
-  doc.text('AUTOMARBE', lm, 15);
-  doc.setTextColor(255, 255, 255);
-  doc.setFontSize(10); doc.setFont('helvetica','normal');
-  doc.text('Datos para el Contador — ' + label, lm, 23);
-  doc.setFontSize(8); doc.setTextColor(150,150,150);
-  doc.text('Generado: ' + new Date().toLocaleDateString('es-VE') + ' · Tasa BCV: ' + tasaBCV.toFixed(2) + ' Bs/$', lm, 30);
-  y = 45;
-
-  function section(title) {
-    doc.setFillColor(240, 240, 240);
-    doc.rect(lm, y-4, rm-lm, 7, 'F');
-    doc.setTextColor(26, 26, 46);
-    doc.setFontSize(9); doc.setFont('helvetica','bold');
-    doc.text(title, lm+2, y+1);
-    y += 8;
-  }
-
-  function row(label2, value, color) {
-    doc.setFont('helvetica','normal'); doc.setFontSize(9);
-    doc.setTextColor(80,80,80); doc.text(label2, lm+2, y);
-    doc.setTextColor(color||[0,0,0]); doc.setFont('helvetica','bold');
-    doc.text(value, rm-2, y, {align:'right'});
-    y += 5;
-  }
-
-  function line() {
-    doc.setDrawColor(220,220,220); doc.line(lm, y-2, rm, y-2); y += 1;
-  }
-
-  // Ingresos
-  section('INGRESOS Y VENTAS');
-  row('Ingresos brutos', '$'+ingresos.toFixed(2));
-  row('Base imponible (sin IVA)', '$'+base.toFixed(2));
-  row('Operaciones', String(sales.length));
-  row('Unidades vendidas', String(sales.reduce((a,s)=>a+s.qty,0)));
-  y += 3;
-
-  // IVA
-  section('IMPUESTO AL VALOR AGREGADO (IVA 16%)');
-  row('Debito fiscal (ventas)', '$'+ivaDebito.toFixed(2), [200,0,0]);
-  row('Credito fiscal (compras + gastos)', '$'+ivaCreditoTotal.toFixed(2), [0,150,0]);
-  row('Cuota neta a pagar SENIAT', '$'+ivaNeto.toFixed(2), [200,120,0]);
-  y += 3;
-
-  // Costos
-  section('COSTOS Y GASTOS');
-  row('Costo de mercancia vendida', '$'+costos.toFixed(2), [200,0,0]);
-  row('Gastos operacionales (fijos)', '$'+fijos.toFixed(2), [200,0,0]);
-  row('Gastos operacionales (variables)', '$'+vars.toFixed(2), [200,0,0]);
-  row('Total gastos operacionales', '$'+gastosOp.toFixed(2));
-  y += 3;
-
-  // Resultado
-  section('RESULTADO DEL PERIODO');
-  row('Ganancia Bruta (sin descontar gastos)', '$'+gBruta.toFixed(2), [0,150,0]);
-  row('Ganancia Neta (despues de gastos)', '$'+gNeta.toFixed(2), gNeta >= 0 ? [0,150,0] : [200,0,0]);
-  y += 5;
-
-  // Detalle compras
-  if (compras.length) {
-    section('DETALLE DE COMPRAS');
-    compras.forEach(c => {
-      doc.setFont('helvetica','normal'); doc.setFontSize(8);
-      doc.setTextColor(80,80,80);
-      doc.text(c.date + ' | ' + c.product + ' x' + c.qty, lm+2, y);
-      doc.text('$' + c.totalUSD.toFixed(2) + ' (IVA: $' + (c.ivaCredito||0).toFixed(2) + ')', rm-2, y, {align:'right'});
-      y += 4;
-      if (y > 260) { doc.addPage(); y = 20; }
-    });
-    y += 3;
-  }
-
-  // Detalle gastos
-  section('DETALLE DE GASTOS');
-  costesFijos.forEach(c => {
-    doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(80,80,80);
-    doc.text(c.name + ' (fijo mensual)', lm+2, y);
-    const amt = isAnual ? c.amount*12 : c.amount;
-    const iva = c.conIva ? (isAnual ? (c.ivaCredito||0)*12 : (c.ivaCredito||0)) : 0;
-    doc.text('$' + amt.toFixed(2) + (c.conIva ? ' (IVA: $'+iva.toFixed(2)+')' : ' (sin IVA)'), rm-2, y, {align:'right'});
-    y += 4;
-  });
-  varsP.forEach(c => {
-    doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(80,80,80);
-    doc.text(c.name + ' · ' + c.date, lm+2, y);
-    doc.text('$' + c.amount.toFixed(2) + (c.conIva ? ' (IVA: $'+(c.ivaCredito||0).toFixed(2)+')' : ' (sin IVA)'), rm-2, y, {align:'right'});
-    y += 4;
-    if (y > 260) { doc.addPage(); y = 20; }
-  });
-
-  // Footer
-  y += 5;
-  doc.setDrawColor(255,23,68); doc.setLineWidth(0.5); doc.line(lm, y, rm, y);
-  y += 5;
-  doc.setFontSize(7); doc.setTextColor(150,150,150); doc.setFont('helvetica','normal');
-  doc.text('AUTOMARBE POS — Documento generado automaticamente. Los datos son estimaciones y deben ser verificados por un profesional contable.', lm, y);
-
-  const fileName = 'AUTOMARBE_Contador_' + (isAnual ? yr : mes) + '.pdf';
-  doc.save(fileName);
-  showToast('📄 PDF descargado: ' + fileName);
-}
 
 function getTopProduct(sales) {
   const counts = {};
@@ -6139,16 +6072,30 @@ function addToCart(id) {
 function uploadProductImage(id, input) {
   const file = input.files[0];
   if (!file) return;
-  if (file.size > 2 * 1024 * 1024) { showToast('⚠️ Imagen muy grande (máx 2MB)'); return; }
+  if (file.size > 5 * 1024 * 1024) { showToast('⚠️ Imagen muy grande (máx 5MB)'); return; }
   const reader = new FileReader();
   reader.onload = function(e) {
-    const p = PRODUCTS.find(pr=>pr.id===id);
-    if (p) {
-      p.image = e.target.result;
-      saveProductImages();
-      renderProductGrid();
-      showToast('✅ Foto guardada');
-    }
+    const img = new Image();
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      const maxDim = 300;
+      let w = img.width, h = img.height;
+      if (w > h) { if (w > maxDim) { h = h * maxDim / w; w = maxDim; } }
+      else { if (h > maxDim) { w = w * maxDim / h; h = maxDim; } }
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      const compressed = canvas.toDataURL('image/webp', 0.7);
+      const p = PRODUCTS.find(pr=>pr.id===id);
+      if (p) {
+        p.image = compressed;
+        db.updateProductImage(id, compressed);
+        saveProductImages();
+        renderProductGrid();
+        showToast('✅ Foto guardada en la nube');
+      }
+    };
+    img.src = e.target.result;
   };
   reader.readAsDataURL(file);
 }
@@ -6196,14 +6143,6 @@ function updatePaymentUI() {
   document.getElementById('confirm-btn').disabled = !selectedPayment || !cart.length;
 }
 
-function printTicket() {
-  if (!cart.length) return;
-  // Make sure invoice is rendered with latest data
-  renderClienteInvoice();
-  // Small delay to ensure render is complete, then print
-  setTimeout(() => { window.print(); }, 200);
-}
-
 let lastSaleItems = [];
 let lastSaleTotal = 0;
 let lastSaleMethod = '';
@@ -6234,26 +6173,36 @@ function printTicket() {
 <title>Ticket ${ticketNum}</title>
 <style>
   @page { margin: 0; size: 80mm auto; }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: 'Courier New', monospace; font-size: 16px; width: 420px; margin: 0 auto; padding: 20px; color: #000; background: #fff; }
+  * { margin:0; padding:0; box-sizing:border-box; color: #000 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  body { font-family: 'Courier New', monospace; font-size: 16px; font-weight: bold; width: 420px; margin: 0 auto; padding: 20px; color: #000; background: #fff; }
   .center { text-align: center; }
-  .bold { font-weight: bold; }
-  .line { border-top: 1px dashed #000; margin: 10px 0; }
-  .dline { border-top: 2px solid #000; margin: 10px 0; }
+  .bold { font-weight: 900; }
+  .line { border-top: 2px dashed #000; margin: 10px 0; }
+  .dline { border-top: 3px solid #000; margin: 10px 0; }
   table { width: 100%; border-collapse: collapse; }
-  td { padding: 4px 0; font-size: 15px; }
-  .total-row td { font-size: 22px; font-weight: bold; padding: 8px 0; }
-  .big { font-size: 28px; font-weight: bold; }
-  .header-name { font-size: 26px; font-weight: bold; letter-spacing: 3px; }
-  .small { font-size: 13px; color: #555; }
-  .info-row { display:flex; justify-content:space-between; font-size:14px; padding:2px 0; }
-  @media print { body { width: 80mm; font-size: 12px; padding: 4px; } td { font-size: 11px; } .total-row td { font-size: 14px; } .header-name { font-size: 16px; } .small { font-size: 10px; } .info-row { font-size: 11px; } }
+  td { padding: 4px 0; font-size: 15px; font-weight: bold; color: #000; }
+  .total-row td { font-size: 22px; font-weight: 900; padding: 8px 0; color: #000; }
+  .big { font-size: 28px; font-weight: 900; }
+  .header-name { font-size: 26px; font-weight: 900; letter-spacing: 3px; color: #000; }
+  .small { font-size: 13px; color: #000; font-weight: bold; }
+  .info-row { display:flex; justify-content:space-between; font-size:14px; font-weight:bold; padding:2px 0; color:#000; }
+  @media print {
+    * { color: #000 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { width: 80mm; font-size: 14px; font-weight: bold; padding: 4px; }
+    td { font-size: 13px; font-weight: bold; }
+    .total-row td { font-size: 16px; font-weight: 900; }
+    .header-name { font-size: 18px; font-weight: 900; }
+    .small { font-size: 11px; font-weight: bold; color: #000; }
+    .info-row { font-size: 12px; font-weight: bold; }
+    .line { border-top: 2px dashed #000; }
+    .dline { border-top: 3px solid #000; }
+  }
 </style>
 </head><body>
   <div class="center">
     <div class="header-name">AUTOMARBE</div>
     <div class="small">Lubricantes y Aceites</div>
-    <div class="small">RIF: J-00000000-0</div>
+    <div class="small">RIF: J-50416359-7</div>
   </div>
   <div class="line"></div>
   <div class="info-row">
