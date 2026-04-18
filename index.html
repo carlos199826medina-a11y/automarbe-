@@ -2975,9 +2975,6 @@ function renderClienteInvoice() {
 
 function showThankYou(total, method) {
   const ty = document.getElementById('thank-you-screen');
-  const totalBs = (total * tasaBCV).toFixed(2);
-  document.getElementById('thank-you-total').textContent = totalBs + ' Bs';
-  document.getElementById('thank-you-method').textContent = 'Pago: ' + method + '  (Ref: $' + total.toFixed(2) + ')';
   document.getElementById('invoice-body').style.display = 'none';
   document.querySelector('.invoice-footer').style.display = 'none';
   ty.classList.add('show');
